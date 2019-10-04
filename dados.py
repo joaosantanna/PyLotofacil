@@ -3,11 +3,6 @@ class Apostas:
     def __init__(self):
         self.__apostas = []
 
-    # crud - create -ok
-    # TODO: Read -ok
-    # TODO: update - ok
-    # TODO: delete - ok
-
     def nova_aposta(self, numeros):
         """
         metodo para criar aposta nova
@@ -51,6 +46,19 @@ class Apostas:
         :return: um conjunto de numeros apostados
         """
         return self.__apostas[posicao]
+
+    def get_lista_apostas(self):
+        """
+        Metodo para passar uma lista com as apostas
+        :return: Uma lista de tuplas , com o indentificador da aposta e os numeros apostados
+        """
+        resposta = []
+        for i, v in enumerate(self.__apostas):
+            texto = 'Aposta ' + str(i + 1) + ':' + str(v)
+            resposta.append(texto)
+
+        return resposta
+
 
     def confere_apostas(self, numeros_sorteados):
         """
