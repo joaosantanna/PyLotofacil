@@ -10,14 +10,14 @@ versao : beta 0.1
 Data : Outubro de 2019
 """
 
-import PySimpleGUI as sg
+import PySimpleGUIQt as sg
 
-
+Tbotao = size=(20, 1)
+fonte = ('Courier', 20)
 def dialogo_nova_aposta():
-    janela2 = sg.Window('Nova Aposta', font=('Helvetica', 11))
-    r = criar_grid_aposta('Informe os numeros da nova aposta')
-    # TODO: tentar ler toda vez que um checkbox for marcado e contar quantos ja foram marcados
-    layout = r
+    janela2 = sg.Window('Nova Aposta', font=fonte)
+
+    layout = criar_grid_aposta('Nova aposta')
 
     janela2 = janela2.Layout(layout)
 
@@ -52,20 +52,24 @@ def criar_grid_aposta(texto):
     for l in range(5):
         tmp = []
         for c in range(5):
-            tmp.append(sg.Checkbox(contador, size=(3, 1)))
+            tmp.append(sg.Checkbox(str(contador), size=(5, 2)))
             contador += 1
         grid.append(tmp)
 
-    botoes = [sg.B('OK'), sg.B('Cancelar')]
+    botoes = [sg.B('OK', size=Tbotao), sg.B('Cancelar', size=Tbotao)]
     grid.append(botoes)
     return grid
 
 
+
 def checar_aposta(lista_de_numeros):
     if len(lista_de_numeros) < 15:
-        sg.PopupError('Quantidade de numeros apostados menor que 15!', title='Erro na quantidade de numeros')
+        sg.PopupError('Quantidade de numeros apostados menor que 15!',
+                      title='Erro na quantidade de numeros',
+                      font= fonte)
         return True
     elif len(lista_de_numeros) > 15:
         resposta = sg.PopupYesNo('Quantidade de numeros apostados maior que 15 você confirma a aposta?',
-                                 title='Duvida ?')
+                                 title='Duvida ?',
+                                 font=fonte)
         return resposta
